@@ -12,7 +12,7 @@ class Storage {
     const key = `${this._prefix}${name}`;
     this[key] = value;
 
-    localStorage[key] = JSON.stringify(value);
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   pGetBytes(name) {
@@ -39,7 +39,7 @@ class Storage {
   set(key, value) {
     this[key] = value;
 
-    localStorage[key] = JSON.stringify(value);
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   get(key) {

@@ -36,13 +36,19 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
+    "@peculiar/webcrypto": "^1.0.26",
     "aes-js": "3.1.2",
     "big-integer": "1.6.48",
     "events": "3.1.0",
+    "file-api": "^0.10.4",
     "jsbn": "1.1.0",
     "leemon": "6.2.0",
     "lodash.debounce": "4.0.8",
-    "pako": "1.0.11"
+    "navigator": "^1.0.1",
+    "node-localstorage": "^2.1.5",
+    "pako": "1.0.11",
+    "text-encoder-lite": "^2.0.0",
+    "ws": "^7.2.3"
   },
   "devDependencies": {
     "dotenv-webpack": "1.7.0",

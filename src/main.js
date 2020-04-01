@@ -22,6 +22,36 @@ const {
 const { AES, SHA1, SHA256, getSRPParams } = require('./utils/crypto');
 const { getRsaKeyByFingerprints } = require('./utils/rsa');
 
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  global.localStorage = new LocalStorage('./scratch');
+}
+
+if (typeof crypto === "undefined" || crypto === null) {
+  const { Crypto } = require("@peculiar/webcrypto");
+  global.crypto = new Crypto();
+}
+
+if (typeof WebSocket === "undefined" || WebSocket === null) {
+  global.WebSocket = require('ws');
+}
+
+if (typeof FileReader === "undefined" || FileReader === null) {
+  global.FileReader = require('file-api');
+}
+
+if (typeof navigator === "undefined" || navigator === null) {
+  global.navigator = require('navigator');
+}
+
+if (typeof TextEncoder === "undefined" || TextEncoder === null) {
+  global.TextEncoder = require('text-encoder-lite').TextEncoderLite;
+}
+
+if (typeof TextDecoder === "undefined" || TextDecoder === null) {
+  global.TextDecoder = require('text-encoder-lite').TextDecoderLite;
+}
+
 class MTProto {
   constructor({ api_id, api_hash, test = false }) {
     this.api_id = api_id;

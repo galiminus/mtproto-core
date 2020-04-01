@@ -33,23 +33,38 @@ class Transport extends EventEmitter {
     this.emit('close', event);
   }
   async handleMessage(event) {
-    const fileReader = new FileReader();
-    fileReader.onload = async event => {
-      const obfuscatedBytes = new Uint8Array(event.target.result);
-      const buffer = await this.deobfuscate(obfuscatedBytes);
+    const obfuscatedBytes = new Uint8Array(event.data);
+    const buffer = await this.deobfuscate(obfuscatedBytes);
 
-      if (buffer.byteLength === 5) {
-        const code = new DataView(buffer).getInt32(1, true) * -1;
+    if (buffer.byteLength === 5) {
+      const code = new DataView(buffer).getInt32(1, true) * -1;
 
-        return this.emit('error', {
-          type: 'transport',
-          code,
-        });
-      }
+      return this.emit('error', {
+        type: 'transport',
+        code,
+      });
+    }
 
-      this.emit('message', buffer);
-    };
-    fileReader.readAsArrayBuffer(event.data);
+    this.emit('message', buffer);
+
+    // const fileReader = new FileReader();
+    // fileReader.onload = async event => {
+    //   const obfuscatedBytes = new Uint8Array(event.target.result).slice(1, -1);
+    //   const buffer = await this.deobfuscate(obfuscatedBytes);
+
+    //   if (buffer.byteLength === 5) {
+    //     const code = new DataView(buffer).getInt32(1, true) * -1;
+
+    //     return this.emit('error', {
+    //       type: 'transport',
+    //       code,
+    //     });
+    //   }
+
+    //   this.emit('message', buffer);
+    // };
+    // event.data.name = "x"
+    // fileReader.readAsArrayBuffer(event.data);
   }
 
   async generateObfuscationKeys() {

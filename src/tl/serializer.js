@@ -224,7 +224,7 @@ class TLSerializer {
   string(value) {
     const encoder = new TextEncoder();
 
-    const bytes = encoder.encode(value);
+    const bytes = encoder.encode(value || "");
 
     this.bytes(bytes);
   }
